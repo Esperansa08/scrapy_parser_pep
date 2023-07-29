@@ -1,19 +1,20 @@
 import scrapy
 
 from pep_parse.items import PepParseItem
+from settings import NAME_SPYDER, ALLOWED_DOMAINS, START_URLS
 
 
 class PepSpider(scrapy.Spider):
-    name = 'pep'
-    allowed_domains = ['peps.python.org']
-    start_urls = ['https://peps.python.org/']
+    name = NAME_SPYDER
+    allowed_domains = ALLOWED_DOMAINS
+    start_urls = START_URLS
 
     def parse(self, response):
         all_pep = response.xpath('//*[@id="numerical-index"]')
         tbody = all_pep.css('tbody')
         href_pep = tbody.css('a[href^="pep"]')
         for pep_link in href_pep:
-            yield response.follow(pep_link, callback=self.parse_pep)
+            yield response.follow(f'{pep_link}/', callback=self.parse_pep)
 
     def parse_pep(self, response):
         text = response.css('h1.page-title::text').get().split()

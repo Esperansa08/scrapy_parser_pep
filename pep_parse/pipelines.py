@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).parent.parent
 
 class PepParsePipeline:
     def open_spider(self, spider):
-        self.pep_status_dict: dict = Counter()
+        self.pep_status_dict = Counter()
         self.result_dir = BASE_DIR / 'results'
         self.result_dir.mkdir(exist_ok=True)
         self.current_dt = dt.now().strftime("%Y-%m-%dT%H-%M-%S")

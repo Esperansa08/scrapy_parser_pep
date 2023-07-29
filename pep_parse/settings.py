@@ -1,5 +1,9 @@
 BOT_NAME = 'pep_parse'
 
+NAME_SPYDER = 'pep'
+ALLOWED_DOMAINS = ['peps.python.org']
+START_URLS = ['https://peps.python.org/']
+
 SPIDER_MODULES = ['pep_parse.spiders']
 NEWSPIDER_MODULE = 'pep_parse.spiders'
 
